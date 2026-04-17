@@ -1,4 +1,5 @@
 import friends from '../data/friends.json'
+import { Link } from 'react-router-dom'
 
 function Friends() {
 	const statusStyles = {
@@ -23,7 +24,11 @@ function Friends() {
 
 				<div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
 					{friends.map((friend) => (
-						<div key={friend.id} className="rounded-lg border border-slate-200 bg-white px-5 py-6 text-center shadow-sm">
+						<Link
+							key={friend.id}
+							to={`/friend/${friend.id}`}
+							className="rounded-lg border border-slate-200 bg-white px-5 py-6 text-center shadow-sm transition hover:-translate-y-0.5 hover:shadow"
+						>
 							<img
 								src={friend.picture}
 								alt={friend.name}
@@ -45,7 +50,7 @@ function Friends() {
 									{statusLabels[friend.status]}
 								</span>
 							</div>
-						</div>
+						</Link>
 					))}
 				</div>
 			</div>
