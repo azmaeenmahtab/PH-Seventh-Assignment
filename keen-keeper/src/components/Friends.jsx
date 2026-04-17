@@ -1,7 +1,22 @@
-import friends from '../data/friends.json'
+import { useEffect, useState } from 'react'
+import friendsData from '../data/friends.json'
 import { Link } from 'react-router-dom'
 
 function Friends() {
+	const [friends, setFriends] = useState([])
+	const [loading, setLoading] = useState(true)
+
+	useEffect(() => {
+		const loadFriends = async () => {
+			setLoading(true)
+			await new Promise((resolve) => setTimeout(resolve, 700))
+			setFriends(friendsData)
+			setLoading(false)
+		}
+
+		loadFriends()
+	}, [])
+
 	const statusStyles = {
 		'overdue': 'bg-[#ef4444] text-white',
 		'almost due': 'bg-[#f4b63e] text-white',
@@ -19,40 +34,63 @@ function Friends() {
 			<div className="mx-auto max-w-[1120px]">
 				<div className="mb-6 flex items-center justify-between px-1">
 					<h3 className="text-2xl font-bold text-slate-800">Your Friends</h3>
-					<p className="text-sm text-slate-500">{friends.length} profiles</p>
+					<p className="text-sm text-slate-500">{loading ? 'Loading...' : `${friends.length} profiles`}</p>
 				</div>
 
-				<div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-					{friends.map((friend) => (
-						<Link
-							key={friend.id}
-							to={`/friend/${friend.id}`}
-							className="rounded-lg border border-slate-200 bg-white px-5 py-6 text-center shadow-sm transition hover:-translate-y-0.5 hover:shadow"
-						>
-							<img
-								src={friend.picture}
-								alt={friend.name}
-								className="mx-auto h-[58px] w-[58px] rounded-full object-cover"
-							/>
-							<h4 className="mt-3 text-[22px] font-semibold leading-tight text-slate-800">{friend.name}</h4>
-							<p className="mt-2 text-[12px] text-slate-400">{friend.days_since_contact}d ago</p>
+				{loading ? (
+					<div>
+						<div className="mb-5 flex items-center justify-center gap-2 text-[#234f42]">
+							<span className="loading loading-spinner loading-md" />
+							<span className="text-sm font-medium">Fetching friends data...</span>
+						</div>
+						<div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+							{Array.from({ length: 8 }).map((_, index) => (
+								<div key={index} className="rounded-lg border border-slate-200 bg-white px-5 py-6 text-center shadow-sm">
+									<div className="mx-auto h-[58px] w-[58px] animate-pulse rounded-full bg-slate-200" />
+									<div className="mx-auto mt-3 h-5 w-30 animate-pulse rounded bg-slate-200" />
+									<div className="mx-auto mt-2 h-3 w-18 animate-pulse rounded bg-slate-100" />
+									<div className="mt-3 flex justify-center gap-2">
+										<div className="h-5 w-14 animate-pulse rounded-full bg-slate-200" />
+										<div className="h-5 w-14 animate-pulse rounded-full bg-slate-200" />
+									</div>
+									<div className="mx-auto mt-3 h-6 w-20 animate-pulse rounded-full bg-slate-200" />
+								</div>
+							))}
+						</div>
+					</div>
+				) : (
+					<div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+						{friends.map((friend) => (
+							<Link
+								key={friend.id}
+								to={`/friend/${friend.id}`}
+								className="rounded-lg border border-slate-200 bg-white px-5 py-6 text-center shadow-sm transition hover:-translate-y-0.5 hover:shadow"
+							>
+								<img
+									src={friend.picture}
+									alt={friend.name}
+									className="mx-auto h-[58px] w-[58px] rounded-full object-cover"
+								/>
+								<h4 className="mt-3 text-[22px] font-semibold leading-tight text-slate-800">{friend.name}</h4>
+								<p className="mt-2 text-[12px] text-slate-400">{friend.days_since_contact}d ago</p>
 
-							<div className="mt-3 flex flex-wrap justify-center gap-2">
-								{friend.tags.map((tag) => (
-									<span key={tag} className="rounded-full bg-[#c9f2d9] px-3 py-[2px] text-[11px] font-semibold uppercase text-[#2e6b4d]">
-										{tag}
+								<div className="mt-3 flex flex-wrap justify-center gap-2">
+									{friend.tags.map((tag) => (
+										<span key={tag} className="rounded-full bg-[#c9f2d9] px-3 py-[2px] text-[11px] font-semibold uppercase text-[#2e6b4d]">
+											{tag}
+										</span>
+									))}
+								</div>
+
+								<div className="mt-3">
+									<span className={`rounded-full px-3 pt-[4px] pb-[6px] text-[11px] font-semibold ${statusStyles[friend.status]}`}>
+										{statusLabels[friend.status]}
 									</span>
-								))}
-							</div>
-
-							<div className="mt-3">
-								<span className={`rounded-full px-3 pt-[4px] pb-[6px] text-[11px] font-semibold ${statusStyles[friend.status]}`}>
-									{statusLabels[friend.status]}
-								</span>
-							</div>
-						</Link>
-					))}
-				</div>
+								</div>
+							</Link>
+						))}
+					</div>
+				)}
 			</div>
 		</section>
 	)
