@@ -1,6 +1,12 @@
 import homeVector from '../assets/homeVector.png'
 import clock from '../assets/Clock.png'
 import chart from '../assets/ChartLine.png'
+import { NavLink } from 'react-router-dom'
+
+const getTabClass = (isActive) =>
+	isActive
+		? 'flex items-center gap-2 rounded-md bg-[#0f5c45] px-4 py-2 text-white'
+		: 'flex items-center gap-2 rounded-md px-3 py-2 text-[#6b7280] hover:bg-gray-200'
 
 function Navbar() {
 	return (
@@ -10,22 +16,22 @@ function Navbar() {
 
 				<ul className="menu menu-horizontal items-center gap-2 rounded-md p-0 text-[14px]">
 					<li>
-						<a className="flex items-center gap-2 rounded-md bg-[#0f5c45] px-4 py-2 text-white">
+						<NavLink to="/" end className={({ isActive }) => getTabClass(isActive)}>
 							<img src={homeVector} alt="Home" className="h-4 w-4" />
 							Home
-						</a>
+						</NavLink>
 					</li>
 					<li>
-						<a className="flex items-center gap-2 rounded-md px-3 py-2 text-[#6b7280] hover:bg-gray-200">
+						<NavLink to="/timeline" className={({ isActive }) => getTabClass(isActive)}>
 							<img src={clock} alt="Timeline" className="h-4 w-4" />
 							Timeline
-						</a>
+						</NavLink>
 					</li>
 					<li>
-						<a className="flex items-center gap-2 rounded-md px-3 py-2 text-[#6b7280] hover:bg-gray-200">
+						<NavLink to="/" className={({ isActive }) => getTabClass(isActive)}>
 							<img src={chart} alt="Stats" className="h-4 w-4" />
 							Stats
-						</a>
+						</NavLink>
 					</li>
 				</ul>
 			</div>

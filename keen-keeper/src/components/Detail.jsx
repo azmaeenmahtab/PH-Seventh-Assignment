@@ -1,9 +1,12 @@
 import { Link, useParams } from 'react-router-dom'
+import { toast } from 'react-toastify'
 import friends from '../data/friends.json'
+import { useTimeline } from '../context/TimelineContext'
 
 function Detail() {
 	const { id } = useParams()
 	const friend = friends.find((item) => item.id === Number(id))
+	const { addTimelineEntry } = useTimeline()
 
 	if (!friend) {
 		return (
@@ -36,6 +39,11 @@ function Detail() {
 		day: 'numeric',
 		year: 'numeric',
 	})
+
+	const handleQuickCheckIn = (interactionType) => {
+		addTimelineEntry(interactionType, friend)
+		toast.success(`${interactionType} with ${friend.name} added to timeline`)
+	}
 
 	return (
 		<section className="bg-[#f3f5f8] px-4 py-12 md:py-16">
@@ -95,9 +103,15 @@ function Detail() {
 					<div className="rounded-lg border border-slate-200 bg-white p-5">
 						<h3 className="text-3xl font-semibold text-[#234f42]">Quick Check-In</h3>
 						<div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-3">
-							<button className="btn h-16 bg-[#f5f7f9] text-slate-800 border-slate-200 hover:bg-slate-100">Call</button>
-							<button className="btn h-16 bg-[#f5f7f9] text-slate-800 border-slate-200 hover:bg-slate-100">Text</button>
-							<button className="btn h-16 bg-[#f5f7f9] text-slate-800 border-slate-200 hover:bg-slate-100">Video</button>
+							<button onClick={() => handleQuickCheckIn('Call')} className="btn h-16 bg-[#f5f7f9] text-slate-800 border-slate-200 hover:bg-slate-100">
+								Call
+							</button>
+							<button onClick={() => handleQuickCheckIn('Text')} className="btn h-16 bg-[#f5f7f9] text-slate-800 border-slate-200 hover:bg-slate-100">
+								Text
+							</button>
+							<button onClick={() => handleQuickCheckIn('Video')} className="btn h-16 bg-[#f5f7f9] text-slate-800 border-slate-200 hover:bg-slate-100">
+								Video
+							</button>
 						</div>
 					</div>
 				</div>
