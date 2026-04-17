@@ -18,12 +18,12 @@ function Footer() {
   return (
     <footer className="bg-[#1f5a49] px-4 py-10 text-white sm:px-6 sm:py-12">
       <div className="mx-auto max-w-280 text-center">
-        <h2 className="text-5xl font-bold leading-none sm:text-6xl">KeenKeeper</h2>
+        <h2 className="text-4xl font-bold leading-none sm:text-5xl md:text-6xl">KeenKeeper</h2>
         <p className="mx-auto mt-4 max-w-165 text-[14px] text-white/80">
           Your personal shelf of meaningful connections. Browse, tend, and nurture the relationships that matter most.
         </p>
 
-        <h3 className="mt-7 text-[20px] font-semibold">Social Links</h3>
+        <h3 className="mt-7 text-lg font-semibold sm:text-[20px]">Social Links</h3>
         <div className="mt-4 flex items-center justify-center gap-3">
           {socials.map((item) => (
             <a
@@ -39,7 +39,7 @@ function Footer() {
 
         <div className="mt-10 border-t border-white/10 pt-5 sm:mt-12 sm:flex sm:items-center sm:justify-between sm:pt-6">
           <p className="text-xs text-white/70">@ 2026 KeenKeeper. All rights reserved.</p>
-          <div className="mt-3 flex items-center justify-center gap-6 text-xs text-white/70 sm:mt-0">
+          <div className="mt-3 flex flex-wrap items-center justify-center gap-4 text-xs text-white/70 sm:mt-0 sm:gap-6">
             {links.map((link) => (
               <a key={link.label} href={link.href} className="hover:text-white">
                 {link.label}

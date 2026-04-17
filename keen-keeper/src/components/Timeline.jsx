@@ -34,10 +34,10 @@ function Timeline() {
 
   return (
     <section className="bg-[#f3f5f8] px-4 py-10 sm:px-6 md:py-12">
-      <div className="mx-auto max-w-245">
-        <h2 className="text-5xl font-bold text-slate-800">Timeline</h2>
+      <div className="mx-auto max-w-6xl">
+        <h2 className="text-4xl font-bold text-slate-800 sm:text-5xl">Timeline</h2>
 
-        <div className="mt-5 max-w-[320px]">
+        <div className="mt-5 w-full max-w-80">
           <select
             className="select w-full border-slate-200 bg-white text-slate-500"
             value={filterType}
@@ -59,7 +59,7 @@ function Timeline() {
 
               return (
                 <div key={entry.id} className="rounded-lg border border-slate-200 bg-white px-4 py-4 sm:px-5">
-                  <p className="flex items-center gap-2 text-[18px] leading-none text-slate-700">
+                  <p className="flex flex-wrap items-center gap-2 text-base leading-normal text-slate-700 sm:text-lg sm:leading-none">
                     <span className="text-2xl">{iconByType[normalizedType] || '📝'}</span>
                     <span className="font-semibold">{entry.type}</span>
                     <span className="text-slate-500">with {entry.friendName}</span>

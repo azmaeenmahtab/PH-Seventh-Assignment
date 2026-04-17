@@ -31,9 +31,9 @@ function Friends() {
 
 	return (
 		<section className="bg-[#f3f5f8] px-4 py-8 sm:px-6 md:py-10">
-			<div className="mx-auto max-w-[1120px]">
-				<div className="mb-6 flex items-center justify-between px-1">
-					<h3 className="text-2xl font-bold text-slate-800">Your Friends</h3>
+			<div className="mx-auto max-w-7xl">
+				<div className="mb-6 flex flex-col items-start justify-between gap-1 px-1 sm:flex-row sm:items-center">
+					<h3 className="text-2xl font-bold text-slate-800 sm:text-3xl">Your Friends</h3>
 					<p className="text-sm text-slate-500">{loading ? 'Loading...' : `${friends.length} profiles`}</p>
 				</div>
 
@@ -43,7 +43,7 @@ function Friends() {
 							<span className="loading loading-spinner loading-md" />
 							<span className="text-sm font-medium">Fetching friends data...</span>
 						</div>
-						<div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+						<div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-4 lg:gap-6">
 							{Array.from({ length: 8 }).map((_, index) => (
 								<div key={index} className="rounded-lg border border-slate-200 bg-white px-5 py-6 text-center shadow-sm">
 									<div className="mx-auto h-[58px] w-[58px] animate-pulse rounded-full bg-slate-200" />
@@ -59,7 +59,7 @@ function Friends() {
 						</div>
 					</div>
 				) : (
-					<div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+					<div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-4 lg:gap-6">
 						{friends.map((friend) => (
 							<Link
 								key={friend.id}
@@ -71,7 +71,7 @@ function Friends() {
 									alt={friend.name}
 									className="mx-auto h-[58px] w-[58px] rounded-full object-cover"
 								/>
-								<h4 className="mt-3 text-[22px] font-semibold leading-tight text-slate-800">{friend.name}</h4>
+								<h4 className="mt-3 text-xl font-semibold leading-tight text-slate-800 sm:text-[22px]">{friend.name}</h4>
 								<p className="mt-2 text-[12px] text-slate-400">{friend.days_since_contact}d ago</p>
 
 								<div className="mt-3 flex flex-wrap justify-center gap-2">

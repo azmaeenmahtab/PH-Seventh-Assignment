@@ -5,16 +5,16 @@ import { NavLink } from 'react-router-dom'
 
 const getTabClass = (isActive) =>
 	isActive
-		? 'flex items-center gap-2 rounded-md bg-[#0f5c45] px-4 py-2 text-white'
+		? 'flex items-center gap-2 rounded-md bg-[#0f5c45] px-3 py-2 text-white sm:px-4'
 		: 'flex items-center gap-2 rounded-md px-3 py-2 text-[#6b7280] hover:bg-gray-200'
 
 function Navbar() {
 	return (
-		<nav className="bg-white px-6 py-3 border-b border-slate-200">
-			<div className="mx-auto flex max-w-300 items-center justify-between">
-				<h1 className="text-[30px] font-bold leading-none text-[#1f2937]">KeenKeeper</h1>
+		<nav className="border-b border-slate-200 bg-white px-4 py-3 sm:px-6">
+			<div className="mx-auto flex w-full max-w-7xl flex-col items-center gap-3 sm:flex-row sm:justify-between">
+				<h1 className="text-3xl font-bold leading-none text-[#1f2937]">KeenKeeper</h1>
 
-				<ul className="menu menu-horizontal items-center gap-2 rounded-md p-0 text-[14px]">
+				<ul className="menu menu-horizontal w-full flex-wrap items-center justify-center gap-2 rounded-md p-0 text-sm sm:w-auto sm:justify-end">
 					<li>
 						<NavLink to="/" end className={({ isActive }) => getTabClass(isActive)}>
 							<img src={homeVector} alt="Home" className="h-4 w-4" />
@@ -28,7 +28,7 @@ function Navbar() {
 						</NavLink>
 					</li>
 					<li>
-						<NavLink to="/" className={({ isActive }) => getTabClass(isActive)}>
+						<NavLink to="/stats" className={({ isActive }) => getTabClass(isActive)}>
 							<img src={chart} alt="Stats" className="h-4 w-4" />
 							Stats
 						</NavLink>

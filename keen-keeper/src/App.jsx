@@ -9,6 +9,7 @@ import Friends from './components/Friends'
 import Footer from './components/Footer'
 import Detail from './components/Detail'
 import Timeline from './components/Timeline'
+import Analytics from './components/Analytics'
 import NotFound from './components/NotFound'
 import { TimelineProvider } from './context/TimelineContext'
 
@@ -43,6 +44,16 @@ function App() {
             <div>
               <Navbar />
               <Timeline />
+              <Footer />
+            </div>
+          }
+        />
+        <Route
+          path="/stats"
+          element={
+            <div>
+              <Navbar />
+              <Analytics />
               <Footer />
             </div>
           }
